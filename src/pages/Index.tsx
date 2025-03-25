@@ -7,7 +7,7 @@ import {
   Building, 
   Castle, 
   Tent, 
-  PalmTree, 
+  Palmtree, 
   Mountain, 
   Home, 
   Waves,
@@ -108,7 +108,7 @@ const Index = () => {
             <PropertyTypeButton icon={Home} label="Houses" />
             <PropertyTypeButton icon={Castle} label="Unique stays" />
             <PropertyTypeButton icon={Tent} label="Cabins" />
-            <PropertyTypeButton icon={PalmTree} label="Tropical" />
+            <PropertyTypeButton icon={Palmtree} label="Tropical" />
             <PropertyTypeButton icon={Mountain} label="Mountain" />
             <PropertyTypeButton icon={Waves} label="Beachfront" />
             <PropertyTypeButton icon={Coffee} label="Breakfast" />

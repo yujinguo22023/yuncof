@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 import { 
@@ -6,7 +5,7 @@ import {
   Building, 
   Castle, 
   Tent, 
-  PalmTree, 
+  Palmtree, 
   Mountain, 
   Home, 
   Waves,
