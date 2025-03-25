@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { z } from "zod";
@@ -369,8 +368,8 @@ const ProfileSettings = () => {
                                 onChange={setPhoneVerificationCode}
                                 render={({ slots }) => (
                                   <InputOTPGroup>
-                                    {slots.map((slot, index) => (
-                                      <InputOTPSlot key={index} {...slot} />
+                                    {slots.map((slot, idx) => (
+                                      <InputOTPSlot key={idx} {...slot} index={idx} />
                                     ))}
                                   </InputOTPGroup>
                                 )}
@@ -522,8 +521,8 @@ const ProfileSettings = () => {
                                 onChange={setTwoFactorCode}
                                 render={({ slots }) => (
                                   <InputOTPGroup>
-                                    {slots.map((slot, index) => (
-                                      <InputOTPSlot key={index} {...slot} />
+                                    {slots.map((slot, idx) => (
+                                      <InputOTPSlot key={idx} {...slot} index={idx} />
                                     ))}
                                   </InputOTPGroup>
                                 )}
@@ -777,3 +776,4 @@ const ProfileSettings = () => {
 };
 
 export default ProfileSettings;
+
