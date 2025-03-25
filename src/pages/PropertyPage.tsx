@@ -8,7 +8,7 @@ const PropertyPage = () => {
 
   return (
     <Layout>
-      <PropertyDetails />
+      <PropertyDetails id={id} />
     </Layout>
   );
 };

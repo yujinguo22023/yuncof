@@ -1,7 +1,7 @@
 
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import { Search, Menu, X, Globe, User } from "lucide-react";
+import { Search, Menu, X, Globe } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { 
   DropdownMenu,
@@ -11,11 +11,14 @@ import {
   DropdownMenuTrigger 
 } from "@/components/ui/dropdown-menu";
 import SearchBar from "./SearchBar";
+import UserAccountNav from "./UserAccountNav";
+import { useAuth } from "@/contexts/AuthContext";
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const { isAuthenticated } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -92,31 +95,18 @@ const Navbar = () => {
                 Explore
               </Button>
             </Link>
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button variant="outline" size="icon" className="rounded-full ml-2 border-border">
-                  <User className="h-4 w-4" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent align="end" className="w-56">
-                <DropdownMenuItem asChild>
-                  <Link to="/login" className="cursor-pointer font-medium">Sign in</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/register" className="cursor-pointer">Sign up</Link>
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem asChild>
-                  <Link to="/listings" className="cursor-pointer">Explore homes</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/" className="cursor-pointer">Host your home</Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link to="/" className="cursor-pointer">Help Center</Link>
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
+            
+            <Button variant="ghost" size="sm" className="rounded-full" asChild>
+              <Link to={isAuthenticated ? "/host" : "/login?redirect=/host"}>
+                Become a host
+              </Link>
+            </Button>
+            
+            <Button variant="ghost" size="icon" className="rounded-full">
+              <Globe className="h-4 w-4" />
+            </Button>
+            
+            <UserAccountNav />
           </div>
 
           {/* Mobile menu button */}
@@ -159,20 +149,56 @@ const Navbar = () => {
               >
                 Explore
               </Link>
-              <Link
-                to="/login"
-                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-muted transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Sign in
-              </Link>
-              <Link
-                to="/register"
-                className="block px-3 py-2 rounded-md text-base font-medium hover:bg-muted transition-colors"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Sign up
-              </Link>
+              {!isAuthenticated && (
+                <>
+                  <Link
+                    to="/login"
+                    className="block px-3 py-2 rounded-md text-base font-medium hover:bg-muted transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Sign in
+                  </Link>
+                  <Link
+                    to="/register"
+                    className="block px-3 py-2 rounded-md text-base font-medium hover:bg-muted transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Sign up
+                  </Link>
+                </>
+              )}
+              {isAuthenticated && (
+                <>
+                  <Link
+                    to="/profile"
+                    className="block px-3 py-2 rounded-md text-base font-medium hover:bg-muted transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    My Account
+                  </Link>
+                  <Link
+                    to="/bookings"
+                    className="block px-3 py-2 rounded-md text-base font-medium hover:bg-muted transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    My Bookings
+                  </Link>
+                  <Link
+                    to="/favorites"
+                    className="block px-3 py-2 rounded-md text-base font-medium hover:bg-muted transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Saved Listings
+                  </Link>
+                  <Link
+                    to="/profile-settings"
+                    className="block px-3 py-2 rounded-md text-base font-medium hover:bg-muted transition-colors"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Settings
+                  </Link>
+                </>
+              )}
               <div className="pt-4 pb-3 border-t border-gray-200">
                 <Button 
                   variant="outline" 
